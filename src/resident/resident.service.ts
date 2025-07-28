@@ -43,4 +43,8 @@ export class ResidentService extends BaseRepository<Resident> {
         };
     }
 
+    async findOneByDni(dni: string): Promise<Resident | null> {
+        return this.residentRepository.findOne({ where: { dni } });
+    }
+
 }
