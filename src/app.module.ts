@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './users/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ResidentModule } from './resident/resident.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -15,15 +16,13 @@ import { ResidentModule } from './resident/resident.module';
       useFactory: (config: ConfigService) => ({
         type: 'postgres',
         url: config.get<string>('DATABASE_URL'),
-        synchronize: false,
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        ssl: {
-          rejectUnauthorized: false,
-        },
+        synchronize: true,
       }),
     }),
     UserModule,
-    ResidentModule
+    ResidentModule,
+    PaymentModule
   ],
   controllers: [AppController],
   providers: [AppService],

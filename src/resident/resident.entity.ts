@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Payment } from "src/payment/entities/payment.entity";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
 
 @Entity()
 export class Resident {
@@ -37,4 +38,8 @@ export class Resident {
 
     @Column()
     status: number;
+
+    // Relación One-to-Many con Payment
+    @OneToMany(() => Payment, (payment) => payment.resident)
+    payments: Payment[];
 }
