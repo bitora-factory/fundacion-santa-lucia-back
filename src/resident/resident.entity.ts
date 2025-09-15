@@ -15,10 +15,10 @@ export class Resident {
     @Column()
     accomodation: number;
 
-    @Column()
+    @Column({ nullable: true })
     guardian: string;
 
-    @Column()
+    @Column({ nullable: true })
     guardianDni: string;
 
     @Column()
@@ -33,10 +33,10 @@ export class Resident {
     @Column()
     phone: string;
 
-    @Column()
+    @Column({ nullable: true, default: 0 })
     payment: number;
 
-    @Column()
+    @Column({ default: 1 })
     status: number;
 
     // Relación One-to-Many con Payment
