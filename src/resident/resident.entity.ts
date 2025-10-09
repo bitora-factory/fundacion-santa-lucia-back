@@ -1,5 +1,5 @@
 import { Payment } from "src/payment/entities/payment.entity";
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, AfterInsert } from "typeorm";
 
 @Entity()
 export class Resident {
@@ -12,7 +12,7 @@ export class Resident {
     @Column({ unique: true })
     dni: string;
 
-    @Column()
+    @Column({ nullable: true })
     accomodation: number;
 
     @Column({ nullable: true })
@@ -21,24 +21,30 @@ export class Resident {
     @Column({ nullable: true })
     guardianDni: string;
 
-    @Column()
+    @Column({ nullable: true })
     address: string;
 
-    @Column()
+    @Column({ nullable: true })
     value: number;
 
-    @Column()
+    @Column({ nullable: true })
     entryDate: Date;
 
-    @Column()
+    @Column({ nullable: true })
     phone: string;
 
-    @Column({ nullable: true, default: 0 })
-    payment: number;
+    @Column({ type: 'text', nullable: true })
+    paymentMethod: string;
 
-    @Column({ default: 1 })
+    @Column({ default: 1, nullable: true })
     status: number;
 
+    @Column({ nullable: true })
+    residentId: number;
+
+    @Column({ nullable: true })
+    relationship: number;
+    
     // Relación One-to-Many con Payment
     @OneToMany(() => Payment, (payment) => payment.resident)
     payments: Payment[];
